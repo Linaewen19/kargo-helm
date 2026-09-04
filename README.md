@@ -5,9 +5,9 @@ This is a GitOps repository of a Kargo Helm example for getting started.
 ### Features:
 
 * A Warehouse which monitors a container repository for new images
-* Three Stage (dev, staging, prod) deploy pipeline
+* Three Stage (dev, preprod, prod) deploy pipeline
 * Image tag promotion
-* Direct Git commits to dev, staging
+* Direct Git commits to dev, preprod
 * Feature flag promotion
 
 ## Requirements
@@ -99,7 +99,7 @@ This is a GitOps repository of a Kargo Helm example for getting started.
 
     To promote, click the target icon to the left of the `dev` Stage, select
     the detected Freight, and click `Yes` to promote. Once promoted, the Freight
-    will be qualified to be promoted to downstream Stages (`staging`, `prod`).
+    will be qualified to be promoted to downstream Stages (`preprod`, `prod`).
 
 
 ## Simulating a release

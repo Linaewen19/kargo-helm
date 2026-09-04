@@ -18,7 +18,7 @@ spec:
     spec:
       destination:
         namespace: kargo-helm-{{path.basename}}
-        name: demo
+        server: https://kubernetes.default.svc
       project: kargo-helm
       source:
         path: charts/guestbook

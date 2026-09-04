@@ -1,5 +1,0 @@
-featureFlags:
-  FEATURE_FOO: enabled
-  FEATURE_BAR: enabled
-  FEATURE_BAZ: enabled
-  

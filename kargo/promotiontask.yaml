@@ -49,8 +49,23 @@ spec:
         'updates '+ctx.stage+' features.yaml from '+commitFrom( vars.repoURL ).ID
         }}"
   - uses: git-push
+    as: push
     config:
       path: ./out
+      generateTargetBranch: true
+  - uses: git-open-pr
+    as: open-pr
+    config:
+      repoURL: ${{ vars.repoURL }}
+      sourceBranch: ${{ outputs.push.branch }}
+      targetBranch: ${{ vars.branch }}
+      provider: github
+      title: "Promote ${{ ctx.stage }}"
+  - uses: git-wait-for-pr
+    as: wait
+    config:
+      provider: github
+      prNumber: ${{ outputs.open-pr.pr.id }}
   - uses: argocd-update
     config:
       apps:

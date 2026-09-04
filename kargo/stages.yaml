@@ -28,11 +28,11 @@ spec:
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
 metadata:
-  name: staging
+  name: preprod
   namespace: kargo-helm
   annotations:
     kargo.akuity.io/color: yellow
-    kargo.akuity.io/argocd-context: '[{"name":"kargo-helm-staging","namespace":"argocd"}]'
+    kargo.akuity.io/argocd-context: '[{"name":"kargo-helm-preprod","namespace":"argocd"}]'
 spec:
   requestedFreight:
   - origin:
@@ -52,21 +52,16 @@ spec:
       steps:
       - task:
           name: promote
-  promotionTemplate:
-    spec:
-      steps:
-      - task:
-          name: promote
 
 ---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Stage
 metadata:
-  name: prod-us
+  name: prod
   namespace: kargo-helm
   annotations:
     kargo.akuity.io/color: red
-    kargo.akuity.io/argocd-context: '[{"name":"kargo-helm-prod-us","namespace":"argocd"}]'
+    kargo.akuity.io/argocd-context: '[{"name":"kargo-helm-prod","namespace":"argocd"}]'
 spec:
   requestedFreight:
   - origin:
@@ -74,42 +69,13 @@ spec:
       name: guestbook
     sources:
       stages:
-        - staging
+        - preprod
   - origin:
       kind: Warehouse
       name: features
     sources:
       stages:
-        - staging
-  promotionTemplate:
-    spec:
-      steps:
-      - task:
-          name: promote
-
----
-apiVersion: kargo.akuity.io/v1alpha1
-kind: Stage
-metadata:
-  name: prod-eu
-  namespace: kargo-helm
-  annotations:
-    kargo.akuity.io/color: red
-    kargo.akuity.io/argocd-context: '[{"name":"kargo-helm-prod-eu","namespace":"argocd"}]'
-spec:
-  requestedFreight:
-  - origin:
-      kind: Warehouse
-      name: guestbook
-    sources:
-      stages:
-        - staging
-  - origin:
-      kind: Warehouse
-      name: features
-    sources:
-      stages:
-        - staging
+        - preprod
   promotionTemplate:
     spec:
       steps:
