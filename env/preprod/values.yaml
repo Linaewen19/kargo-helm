@@ -1,4 +1,4 @@
 image:
-  tag: v0.0.1
+  tag: preprod-v0.0.1
 
 replicaCount: 1
