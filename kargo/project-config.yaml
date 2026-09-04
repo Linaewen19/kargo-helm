@@ -1,0 +1,16 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: ProjectConfig
+metadata:
+  name: kargo-helm
+  namespace: kargo-helm
+spec:
+  promotionPolicies:
+  - stageSelector:
+      name: "glob:*"
+    autoRollback:
+      onVerification:
+      - Failed
+      - Error
+      onPromotion:
+      - Failed
+      - Errored
