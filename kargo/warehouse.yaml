@@ -1,48 +1,6 @@
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Warehouse
 metadata:
-  name: guestbook-dev
-  namespace: kargo-helm
-spec:
-  subscriptions:
-  - image:
-      repoURL: ghcr.io/linaewen19/guestbook
-      imageSelectionStrategy: NewestBuild
-      allowTagsRegexes:
-      - ^dev-
-
----
-apiVersion: kargo.akuity.io/v1alpha1
-kind: Warehouse
-metadata:
-  name: guestbook-preprod
-  namespace: kargo-helm
-spec:
-  subscriptions:
-  - image:
-      repoURL: ghcr.io/linaewen19/guestbook
-      imageSelectionStrategy: NewestBuild
-      allowTagsRegexes:
-      - ^preprod-
-
----
-apiVersion: kargo.akuity.io/v1alpha1
-kind: Warehouse
-metadata:
-  name: guestbook-prod
-  namespace: kargo-helm
-spec:
-  subscriptions:
-  - image:
-      repoURL: ghcr.io/linaewen19/guestbook
-      imageSelectionStrategy: NewestBuild
-      allowTagsRegexes:
-      - ^prod-
-
----
-apiVersion: kargo.akuity.io/v1alpha1
-kind: Warehouse
-metadata:
   name: features
   namespace: kargo-helm
 spec:
@@ -54,3 +12,143 @@ spec:
       repoURL: https://github.com/linaewen19/kargo-helm.git
       includePaths:
       - base/feature-flags.yaml
+
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: guestbook-preprod-safti-fr
+  namespace: kargo-helm
+spec:
+  subscriptions:
+  - image:
+      repoURL: ghcr.io/linaewen19/guestbook
+      imageSelectionStrategy: NewestBuild
+      allowTagsRegexes:
+      - ^preprod-safti-fr-
+
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: guestbook-prod-safti-fr
+  namespace: kargo-helm
+spec:
+  subscriptions:
+  - image:
+      repoURL: ghcr.io/linaewen19/guestbook
+      imageSelectionStrategy: NewestBuild
+      allowTagsRegexes:
+      - ^prod-safti-fr-
+
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: guestbook-preprod-safti-es
+  namespace: kargo-helm
+spec:
+  subscriptions:
+  - image:
+      repoURL: ghcr.io/linaewen19/guestbook
+      imageSelectionStrategy: NewestBuild
+      allowTagsRegexes:
+      - ^preprod-safti-es-
+
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: guestbook-prod-safti-es
+  namespace: kargo-helm
+spec:
+  subscriptions:
+  - image:
+      repoURL: ghcr.io/linaewen19/guestbook
+      imageSelectionStrategy: NewestBuild
+      allowTagsRegexes:
+      - ^prod-safti-es-
+
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: guestbook-preprod-safti-de
+  namespace: kargo-helm
+spec:
+  subscriptions:
+  - image:
+      repoURL: ghcr.io/linaewen19/guestbook
+      imageSelectionStrategy: NewestBuild
+      allowTagsRegexes:
+      - ^preprod-safti-de-
+
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: guestbook-prod-safti-de
+  namespace: kargo-helm
+spec:
+  subscriptions:
+  - image:
+      repoURL: ghcr.io/linaewen19/guestbook
+      imageSelectionStrategy: NewestBuild
+      allowTagsRegexes:
+      - ^prod-safti-de-
+
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: guestbook-preprod-safti-pt
+  namespace: kargo-helm
+spec:
+  subscriptions:
+  - image:
+      repoURL: ghcr.io/linaewen19/guestbook
+      imageSelectionStrategy: NewestBuild
+      allowTagsRegexes:
+      - ^preprod-safti-pt-
+
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: guestbook-prod-safti-pt
+  namespace: kargo-helm
+spec:
+  subscriptions:
+  - image:
+      repoURL: ghcr.io/linaewen19/guestbook
+      imageSelectionStrategy: NewestBuild
+      allowTagsRegexes:
+      - ^prod-safti-pt-
+
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: guestbook-preprod-megagence-fr
+  namespace: kargo-helm
+spec:
+  subscriptions:
+  - image:
+      repoURL: ghcr.io/linaewen19/guestbook
+      imageSelectionStrategy: NewestBuild
+      allowTagsRegexes:
+      - ^preprod-megagence-fr-
+
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: guestbook-prod-megagence-fr
+  namespace: kargo-helm
+spec:
+  subscriptions:
+  - image:
+      repoURL: ghcr.io/linaewen19/guestbook
+      imageSelectionStrategy: NewestBuild
+      allowTagsRegexes:
+      - ^prod-megagence-fr-

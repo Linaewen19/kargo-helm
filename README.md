@@ -4,11 +4,16 @@ This is a GitOps repository of a Kargo Helm example for getting started.
 
 ### Features:
 
-* A Warehouse which monitors a container repository for new images
-* Three Stage (dev, preprod, prod) deploy pipeline
-* Image tag promotion
-* Direct Git commits to dev, preprod
-* Feature flag promotion
+* Multi-tenant setup: 5 tenants (safti-fr, safti-es, safti-de, safti-pt, megagence-fr),
+  each with its own `preprod`/`prod` Stage pair (10 Stages total)
+* Per-tenant, per-env Warehouses monitoring their own image tag pattern
+  (`preprod-<tenant>-*`, `prod-<tenant>-*`) — no image promoted across Stages,
+  since each env/tenant combination is built independently by CI (matching a
+  build-per-env-per-tenant pipeline, e.g. Symfony `cache:warmup` baked at build time)
+* Feature flag promotion still cascades `preprod-<tenant> -> prod-<tenant>`,
+  since config genuinely is the same artifact promoted forward
+* Promotion opens a Pull Request and waits for it to be merged before proceeding
+  (see `kargo/promotiontask.yaml`)
 
 ## Requirements
 
@@ -91,25 +96,30 @@ This is a GitOps repository of a Kargo Helm example for getting started.
 
 10. Promote the image!
 
-    You now have a Kargo Pipeline which promotes images from the guestbook
-    container image repository, through a three-stage deploy pipeline. Visit
-    the `kargo-helm` Project in the Kargo UI to see the deploy pipeline.
+    You now have a Kargo Pipeline per tenant, each with a `preprod` and `prod`
+    Stage. Visit the `kargo-helm` Project in the Kargo UI to see the 10 Stages
+    (5 tenants x 2 envs).
 
     ![pipeline](docs/pipeline.png)
 
-    To promote, click the target icon to the left of the `dev` Stage, select
-    the detected Freight, and click `Yes` to promote. Once promoted, the Freight
-    will be qualified to be promoted to downstream Stages (`preprod`, `prod`).
+    Each `preprod-<tenant>` Stage pulls its image directly from its own
+    Warehouse (simulating a CI that builds a distinct image per env/tenant).
+    To promote, click the target icon to the left of a `preprod-<tenant>`
+    Stage, select the detected Freight, and click `Yes` to promote. This opens
+    a Pull Request and waits for it to be merged before syncing Argo CD. The
+    `features` Freight (feature flags), unlike the image, does cascade forward
+    to the corresponding `prod-<tenant>` Stage once promoted.
 
 
 ## Simulating a release
 
-To simulate a release, simply retag an image with a newer semantic version. e.g.:
+To simulate a release, retag an image matching one tenant/env's tag pattern.
+e.g. for `safti-fr` preprod:
 
 ```shell
 docker buildx imagetools create \
   ghcr.io/akuity/guestbook:latest \
-  -t ghcr.io/<yourgithubusername>/guestbook:v0.0.2
+  -t ghcr.io/<yourgithubusername>/guestbook:preprod-safti-fr-v0.0.2
 ```
 
 Then refresh the Warehouse in the UI to detect the new Freight.
