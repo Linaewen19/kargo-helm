@@ -26,4 +26,3 @@ spec:
         helm:
           valueFiles:
           - "/env/{{path.basename}}/values.yaml"
-          - "/env/{{path.basename}}/feature-flags.yaml"

@@ -10,10 +10,12 @@ This is a GitOps repository of a Kargo Helm example for getting started.
   (`preprod-<tenant>-*`, `prod-<tenant>-*`) — no image promoted across Stages,
   since each env/tenant combination is built independently by CI (matching a
   build-per-env-per-tenant pipeline, e.g. Symfony `cache:warmup` baked at build time)
-* Feature flag promotion still cascades `preprod-<tenant> -> prod-<tenant>`,
-  since config genuinely is the same artifact promoted forward
 * Promotion opens a Pull Request and waits for it to be merged before proceeding
   (see `kargo/promotiontask.yaml`)
+
+> Note: feature flag promotion (config cascading across Stages, independent of
+> the image) is intentionally left out of this variant to keep the multi-tenant
+> demo focused. See git history for a simpler single-tenant setup that includes it.
 
 ## Requirements
 
@@ -102,13 +104,12 @@ This is a GitOps repository of a Kargo Helm example for getting started.
 
     ![pipeline](docs/pipeline.png)
 
-    Each `preprod-<tenant>` Stage pulls its image directly from its own
-    Warehouse (simulating a CI that builds a distinct image per env/tenant).
-    To promote, click the target icon to the left of a `preprod-<tenant>`
-    Stage, select the detected Freight, and click `Yes` to promote. This opens
-    a Pull Request and waits for it to be merged before syncing Argo CD. The
-    `features` Freight (feature flags), unlike the image, does cascade forward
-    to the corresponding `prod-<tenant>` Stage once promoted.
+    Each `preprod-<tenant>`/`prod-<tenant>` Stage pulls its image directly from
+    its own Warehouse (simulating a CI that builds a distinct image per
+    env/tenant) — there's no cross-Stage promotion of the image itself.
+    To promote, click the target icon to the left of a Stage, select the
+    detected Freight, and click `Yes` to promote. This opens a Pull Request
+    and waits for it to be merged before syncing Argo CD.
 
 
 ## Simulating a release
@@ -122,10 +123,4 @@ docker buildx imagetools create \
   -t ghcr.io/<yourgithubusername>/guestbook:preprod-safti-fr-v0.0.2
 ```
 
-Then refresh the Warehouse in the UI to detect the new Freight.
-
-
-## Promoting a feature
-
-Edit the `base/feature-flags.yaml` with a new setting. This will be detected
-by the `features` Warehouse as a promotable configuration.
+Then refresh the corresponding Warehouse in the UI to detect the new Freight.

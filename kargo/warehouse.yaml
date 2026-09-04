@@ -1,22 +1,6 @@
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Warehouse
 metadata:
-  name: features
-  namespace: kargo-helm
-spec:
-  subscriptions:
-  - git:
-      branch: main
-      commitSelectionStrategy: NewestFromBranch
-      discoveryLimit: 20
-      repoURL: https://github.com/linaewen19/kargo-helm.git
-      includePaths:
-      - base/feature-flags.yaml
-
----
-apiVersion: kargo.akuity.io/v1alpha1
-kind: Warehouse
-metadata:
   name: guestbook-preprod-safti-fr
   namespace: kargo-helm
 spec:

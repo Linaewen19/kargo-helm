@@ -13,11 +13,6 @@ spec:
       name: guestbook-preprod-safti-fr
     sources:
       direct: true
-  - origin:
-      kind: Warehouse
-      name: features
-    sources:
-      direct: true
   promotionTemplate:
     spec:
       steps:
@@ -40,12 +35,6 @@ spec:
       name: guestbook-prod-safti-fr
     sources:
       direct: true
-  - origin:
-      kind: Warehouse
-      name: features
-    sources:
-      stages:
-        - preprod-safti-fr
   promotionTemplate:
     spec:
       steps:
@@ -66,11 +55,6 @@ spec:
   - origin:
       kind: Warehouse
       name: guestbook-preprod-safti-es
-    sources:
-      direct: true
-  - origin:
-      kind: Warehouse
-      name: features
     sources:
       direct: true
   promotionTemplate:
@@ -95,12 +79,6 @@ spec:
       name: guestbook-prod-safti-es
     sources:
       direct: true
-  - origin:
-      kind: Warehouse
-      name: features
-    sources:
-      stages:
-        - preprod-safti-es
   promotionTemplate:
     spec:
       steps:
@@ -121,11 +99,6 @@ spec:
   - origin:
       kind: Warehouse
       name: guestbook-preprod-safti-de
-    sources:
-      direct: true
-  - origin:
-      kind: Warehouse
-      name: features
     sources:
       direct: true
   promotionTemplate:
@@ -150,12 +123,6 @@ spec:
       name: guestbook-prod-safti-de
     sources:
       direct: true
-  - origin:
-      kind: Warehouse
-      name: features
-    sources:
-      stages:
-        - preprod-safti-de
   promotionTemplate:
     spec:
       steps:
@@ -176,11 +143,6 @@ spec:
   - origin:
       kind: Warehouse
       name: guestbook-preprod-safti-pt
-    sources:
-      direct: true
-  - origin:
-      kind: Warehouse
-      name: features
     sources:
       direct: true
   promotionTemplate:
@@ -205,12 +167,6 @@ spec:
       name: guestbook-prod-safti-pt
     sources:
       direct: true
-  - origin:
-      kind: Warehouse
-      name: features
-    sources:
-      stages:
-        - preprod-safti-pt
   promotionTemplate:
     spec:
       steps:
@@ -231,11 +187,6 @@ spec:
   - origin:
       kind: Warehouse
       name: guestbook-preprod-megagence-fr
-    sources:
-      direct: true
-  - origin:
-      kind: Warehouse
-      name: features
     sources:
       direct: true
   promotionTemplate:
@@ -260,12 +211,6 @@ spec:
       name: guestbook-prod-megagence-fr
     sources:
       direct: true
-  - origin:
-      kind: Warehouse
-      name: features
-    sources:
-      stages:
-        - preprod-megagence-fr
   promotionTemplate:
     spec:
       steps:
