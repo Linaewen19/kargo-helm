@@ -57,7 +57,7 @@ spec:
     as: open-pr
     config:
       repoURL: ${{ vars.repoURL }}
-      sourceBranch: ${{ outputs.push.branch }}
+      sourceBranch: ${{ task.outputs.push.branch }}
       targetBranch: ${{ vars.branch }}
       provider: github
       title: "Promote ${{ ctx.stage }}"
@@ -65,7 +65,7 @@ spec:
     as: wait
     config:
       provider: github
-      prNumber: ${{ outputs.open-pr.pr.id }}
+      prNumber: ${{ task.outputs['open-pr'].pr.id }}
   - uses: argocd-update
     config:
       apps:
