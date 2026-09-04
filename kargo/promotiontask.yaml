@@ -44,7 +44,8 @@ spec:
       targetBranch: ${{ vars.branch }}
       provider: github
       title: "Promote ${{ ctx.stage }}"
-  - uses: git-wait-for-pr
+  - if: ${{ task.outputs['open-pr'] != nil }}
+    uses: git-wait-for-pr
     as: wait
     config:
       repoURL: ${{ vars.repoURL }}
