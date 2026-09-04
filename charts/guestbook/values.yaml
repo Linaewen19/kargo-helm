@@ -1,5 +1,5 @@
 image:
-  repository: ghcr.io/Linaewen19/guestbook
+  repository: ghcr.io/linaewen19/guestbook
   pullPolicy: IfNotPresent
   tag: latest
 
