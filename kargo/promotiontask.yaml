@@ -64,6 +64,7 @@ spec:
   - uses: git-wait-for-pr
     as: wait
     config:
+      repoURL: ${{ vars.repoURL }}
       provider: github
       prNumber: ${{ task.outputs['open-pr'].pr.id }}
   - uses: argocd-update
