@@ -1,4 +1,4 @@
 image:
-  tag: prod-megagence-fr-v0.0.1
+  tag: prod-megagence-fr-v0.0.2
 
 replicaCount: 2
