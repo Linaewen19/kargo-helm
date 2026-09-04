@@ -10,7 +10,7 @@ spec:
   requestedFreight:
   - origin:
       kind: Warehouse
-      name: guestbook
+      name: guestbook-dev
     sources:
       direct: true
   - origin:
@@ -37,10 +37,9 @@ spec:
   requestedFreight:
   - origin:
       kind: Warehouse
-      name: guestbook
+      name: guestbook-preprod
     sources:
-      stages:
-        - dev
+      direct: true
   - origin:
       kind: Warehouse
       name: features
@@ -66,10 +65,9 @@ spec:
   requestedFreight:
   - origin:
       kind: Warehouse
-      name: guestbook
+      name: guestbook-prod
     sources:
-      stages:
-        - preprod
+      direct: true
   - origin:
       kind: Warehouse
       name: features

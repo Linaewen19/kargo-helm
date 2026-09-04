@@ -1,13 +1,43 @@
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Warehouse
 metadata:
-  name: guestbook
+  name: guestbook-dev
   namespace: kargo-helm
 spec:
   subscriptions:
   - image:
       repoURL: ghcr.io/linaewen19/guestbook
-      imageSelectionStrategy: SemVer
+      imageSelectionStrategy: NewestBuild
+      allowTagsRegexes:
+      - ^dev-
+
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: guestbook-preprod
+  namespace: kargo-helm
+spec:
+  subscriptions:
+  - image:
+      repoURL: ghcr.io/linaewen19/guestbook
+      imageSelectionStrategy: NewestBuild
+      allowTagsRegexes:
+      - ^preprod-
+
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: guestbook-prod
+  namespace: kargo-helm
+spec:
+  subscriptions:
+  - image:
+      repoURL: ghcr.io/linaewen19/guestbook
+      imageSelectionStrategy: NewestBuild
+      allowTagsRegexes:
+      - ^prod-
 
 ---
 apiVersion: kargo.akuity.io/v1alpha1

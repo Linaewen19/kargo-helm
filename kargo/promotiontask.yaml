@@ -19,7 +19,7 @@ spec:
       checkout:
       - branch: ${{ vars.branch }}
         path: ./out
-  - if: ${{ ctx.targetFreight.origin.name == "guestbook" }}
+  - if: ${{ ctx.targetFreight.origin.name == "guestbook-" + ctx.stage }}
     uses: yaml-update
     as: update-image
     config:
@@ -44,7 +44,7 @@ spec:
     config:
       path: ./out
       message: "${{
-        ctx.targetFreight.origin.name == 'guestbook' ? 
+        ctx.targetFreight.origin.name == 'guestbook-' + ctx.stage ?
         'updated '+ctx.stage+' guestbook to '+imageFrom( vars.image ).Tag :
         'updates '+ctx.stage+' features.yaml from '+commitFrom( vars.repoURL ).ID
         }}"
