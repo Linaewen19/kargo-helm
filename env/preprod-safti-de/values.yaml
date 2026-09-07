@@ -1,4 +1,4 @@
 image:
-  tag: v0.0.88
+  tag: preprod-safti-de-v0.0.1
 
 replicaCount: 1
