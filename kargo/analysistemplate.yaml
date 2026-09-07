@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: smoke-test
+  namespace: kargo-helm
+spec:
+  args:
+  - name: namespace
+  metrics:
+  - name: http-check
+    provider:
+      job:
+        spec:
+          template:
+            spec:
+              containers:
+              - name: curl
+                image: curlimages/curl
+                command:
+                - sh
+                - -c
+                - "curl -sf http://guestbook.{{args.namespace}}.svc.cluster.local"
+              restartPolicy: Never
+          backoffLimit: 0

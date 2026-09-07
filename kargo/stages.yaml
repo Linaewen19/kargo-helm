@@ -189,6 +189,12 @@ spec:
       name: guestbook-preprod-megagence-fr
     sources:
       direct: true
+  verification:
+    analysisTemplates:
+    - name: smoke-test
+    args:
+    - name: namespace
+      value: kargo-helm-${{ ctx.stage }}
   promotionTemplate:
     spec:
       steps:
@@ -211,6 +217,12 @@ spec:
       name: guestbook-prod-megagence-fr
     sources:
       direct: true
+  verification:
+    analysisTemplates:
+    - name: smoke-test
+    args:
+    - name: namespace
+      value: kargo-helm-${{ ctx.stage }}
   promotionTemplate:
     spec:
       steps:
